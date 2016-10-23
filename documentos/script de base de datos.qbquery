@@ -1,0 +1,22 @@
+
+
+
+
+CREATE SCHEMA bd_ahorcado;
+USE bd_ahorcado;
+
+CREATE TABLE tb_usuarios
+(
+  documento    varchar( 20 )    not null,
+  nombre       varchar( 50 )    not null,
+  fecha_registro  datetime      not null,
+  fecha_inicio    datetime      null,
+  fecha_fin       datetime      null,
+  tiempo_segundos  double      null,
+  tiempo_minutos   double      null,
+  primary key( documento )
+);
+
+SHOW TABLES;
+
+SELECT * FROM tb_usuarios;
