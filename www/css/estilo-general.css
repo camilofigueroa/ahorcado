@@ -1,0 +1,52 @@
+/* Autor: Camilo Figueroa ( Crivera ) 23/10/2016 */
+
+body
+{
+	font-family: Tahoma;
+    color: red;
+}
+
+/* Este es el contenedor de todo*/
+#gran-contenedor
+{
+	border: dashed; 1px;
+}
+
+#contenedor-textos-letras
+{
+	padding: 5px;
+}
+
+#contenedor-imagen
+{
+	color: white;
+	background-color: black;
+}
+
+.texto-entrada
+{
+    font-size: 20px;
+}
+
+#contenedor-teclado
+{
+	text-align: center;
+	max-width: 230px;
+	margin: 50px;
+}
+
+.botonera
+{
+	font-size: 25px;
+}
+
+#contenedor-navegacion-grande
+{
+	text-align: center;
+	width: 100%;
+}
+
+#boton-empezar
+{
+	font-size: 50px;
+}
