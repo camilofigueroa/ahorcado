@@ -331,3 +331,77 @@ function al_suceder_tiempo()
     //Aquí se afecta el contenedor o div para que muestre la cadena o el cronómetro.
     document.getElementById( "contenedor-temporizador" ).innerHTML = cad + " " + d.toLocaleTimeString();  
 }
+
+
+/***********************************************************************************************************************************/
+//------------------- A N G U L A R J S -------------------------------------------------------------------------------------------
+/***********************************************************************************************************************************/
+
+var acumuladorApp = angular.module( 'acumuladorApp', [] );
+
+ acumuladorApp.controller( "acumuladorAppCtrl",
+            
+    //[ "$scope",  //Originalmente solo se minificaba el scope.
+    [ "$scope", "$http", //Esto es para minificar, pero interfiere con lo de php, hay que minificar las otras variables.
+        
+        function( $scope, $http )
+        {
+            //Lo que aparece allá puede ser editado desde el exterior, como un cargue inicial.
+            /*$scope.informacion = "Aquí se inicializa información.";
+            $scope.imagen  = "imagenes/001.jpg";
+            $scope.letra = 20;*/
+            
+            $scope.informacion = "Camilo ";
+            console.log( "Accediendo a angular." );
+
+            /**
+             * El evento del texto es afectado por esta función, que en resumen actua al cambio instantaneo.
+             */
+            $scope.cargar_datos = function()
+            {
+                var cad = $scope.datos.texto1;
+                var cad2 = $scope.datos.texto2;
+                var vector;
+                
+                if( cad2.length <= 0 ) cad2 = "Texto 2 vacío ";
+                
+                /*if( cad != "" ) //Para realizar operaciones se revisa que la cadena digitada no sea vacía.
+                {                                                        
+                    //Si la cadena digitada representa una imagen, la imagen se cargará.
+                    if( cad.indexOf( ".jpg" ) >= 0 ){ $scope.imagen = "imagenes/" + cad; }
+                    else{ $scope.imagen  = "imagenes/001.jpg"; } 
+                    
+                    //Afectamos el tamaño de letra.
+                    if( cad.length > 10 ) $scope.letra = cad.length; 
+                    
+                    //Esta función proviene de otro archivo js. El vector se encarga de definir parámetros.
+                    cad = validar_campo( cad, [ 4, 25 ], retornar_palabras_prohibidas() );
+                    
+                    //Esto sería equivalente al return.
+                    $scope.informacion =  cad2 + cad;
+                }*/
+            };
+            
+            /**
+             * Esta función se activa al usar el texto 2.
+             */
+            /*$scope.cargar_datos_php = function()
+            {
+                var cad2 = $scope.datos.texto2;
+                
+                if( cad2.length > 0 )
+                {
+                    //Aquí se hace el llamado a un php con conexión a MySQL.
+                    $http.get( 'llamado-php.php?cadena=' + cad2 ).success
+                    (
+                        function( response ) 
+                        { 
+                            console.log( response );
+                            $scope.campos = response.records;            
+                        }
+                    );   
+                }                    
+            }*/
+        }
+    ] //Si se minifica, se deben minificar todas las llamadas inyecciones, de lo contrario mejor no minifique nada.
+);
