@@ -21,8 +21,6 @@
     
     <body>
         
-        Juego del ahorcado<br>
-        
         <div ng-controller="acumuladorAppCtrl">
         
             <div id="gran-contenedor" ng-controller="acumuladorAppCtrl">
@@ -31,19 +29,24 @@
             
             <div>
             
-                Documento   <input type="text" ng-model="datos.documento" ng-change="traer_usuario_php();">
-                Nombre   <input type="text" ng-model="datos.nombre">
-                <button id="boton-guardar" ng-click="guardar_datos_php()" value="Guardar y jugar.">Guardar y jugar.</button>
+                <div id="contenedor-formulario-datos">
+                    
+                    Documento   <input type="text" ng-model="datos.documento" ng-change="traer_usuario_php();"> <br>
+                    Nombre   <input type="text" ng-model="datos.nombre"> <br>
+                    <button id="boton-guardar" ng-click="guardar_datos_php()" value="Guardar y jugar.">Guardar y jugar.</button>
+                    
+                    <!-- Este botón permanecerá oculto pues su funcionalidad será usada por el javascript con Angular. -->
+                    <button id="boton-ranking" ng-click="cargar_datos_php()">Ver ranking.</button>
+                    
+                    <!-- Este botón permanecerá oculto pues su funcionalidad será usada por el javascript con Angular. -->
+                    <button id="boton-actualizar" ng-click="actualizar_fecha_fin( 54364, 0 )">Actualizar datos.</button>
+                    
+                </div>
                 
-                <!-- Este botón permanecerá oculto pues su funcionalidad será usada por el javascript con Angular. -->
-                <button id="boton-ranking" ng-click="cargar_datos_php()">Ver ranking.</button>
-                
-                <!-- Este botón permanecerá oculto pues su funcionalidad será usada por el javascript con Angular. -->
-                <button id="boton-actualizar" ng-click="actualizar_fecha_fin( 54364, 0 )">Actualizar datos.</button>
                 
                 <div id="contenedor-ranking">
                     
-                    <h3>Ranking</h3>
+                    <h3>Ranking</h3> o resultados de la b&uacute;squeda. 
                     
                     <!-- Esto sucede cuando se guarda un usuario. -->
                     <div ng-repeat="x in campos">
