@@ -16,6 +16,8 @@ var g_palabra = "";
 var g_conteo_equivocaciones = 0;
 var g_minuto = 0, g_segundo = 0;
 var g_objeto_temporizador = "";
+var g_documento = "";
+var g_nombre = "";
 
 
 //--------------------Desde aquí se empieza a cargar todo ---------- From here everything is loaded -------------------------------------------
@@ -24,6 +26,10 @@ window.onload = function()
     console.log( "Funcionando." );   
     colocar_palabras();    
     document.getElementById( "gran-contenedor" ).innerHTML = definir_interfaz();
+
+    //Se ejecuta el ranking desde el inicio desde Angular con el borón de traer ranking.
+    //angular.element( document.getElementById( 'boton-ranking') ).scope().imprimir();
+    angular.element( document.getElementById( 'boton-ranking') ).scope().cargar_datos_php();
 };
 
 
@@ -45,7 +51,7 @@ function definir_interfaz()
     salida += definir_teclado();
 
     //Ojo, aqupi está el botón empezar.
-    salida += "<div id='contenedor-navegacion-grande'><input type='button' id='boton-empezar' value='Jugar' onclick='empezar( this );'></div>";
+    //salida += "<div id='contenedor-navegacion-grande'><input type='button' id='boton-empezar' value='Jugar' onclick='empezar( this );'></div>";  
 
     return salida;
 }
@@ -132,6 +138,7 @@ function verificar_ganador( des )
     {
         sn_ganador = 1;
         clearInterval( g_objeto_temporizador );
+        angular.element( document.getElementById( 'boton-actualizar') ).scope().actualizar_fecha_fin( g_documento, 1 );
 
     }else{
             //En esta parte se establece un perdedor si es lo que se desea de esta función, 
@@ -139,6 +146,7 @@ function verificar_ganador( des )
             {
                 sn_ganador = -1;
                 clearInterval( g_objeto_temporizador );
+                angular.element( document.getElementById( 'boton-actualizar') ).scope().actualizar_fecha_fin( g_documento, -2 );
             }
         }
 
@@ -227,9 +235,9 @@ function traer_aleatorio_en_rango( minimo, maximo )
  */
 function colocar_palabras()
 {
-    g_arreglo_palabras.push( { palabra: "monetizar",        descripcion: "Todo escritor de blogs y páginas web debería realizar esta actividad." } );
+    g_arreglo_palabras.push( { palabra: "monetizar",        descripcion: "Todo escritor de blogs y páginas web debería realizar esta actividad. Es muy importante para su bolsillo." } );
     g_arreglo_palabras.push( { palabra: "teletrabajo",      descripcion: "Es una modalidad de trabajo que se vale de las TIC y le permite al trabajor laborar desde un lugar diferente a la oficina." } );
-    g_arreglo_palabras.push( { palabra: "tecnologia" ,      descripcion: "Es una parte importante de la modalidad de teletrabajo pues permite realizar lo técnico, desde el mismo trabajo hasta el cobro del pago." } );
+    g_arreglo_palabras.push( { palabra: "tecnologia" ,      descripcion: "Es una parte importante de la modalidad de teletrabajo pues permite realizar lo técnico, desde el mismo trabajo hasta el cobro de sus honorarios." } );
 }
 
 /**
@@ -246,10 +254,12 @@ function mostrar_ganador_perdedor( mensaje )
 /**
  * Da inicio a todo esto.
  */
-function empezar( objeto )
+//function empezar( objeto )
+function empezar()
 {
     definir_temporizador();
-    objeto.style.visibility = "hidden";
+    //objeto.style.visibility = "hidden";
+    document.getElementById( "boton-guardar" ).style.visibility = "hidden";
 }
 
 /**
@@ -321,6 +331,7 @@ function al_suceder_tiempo()
         g_conteo_equivocaciones = g_maximo_fallos; //Esto se acomoda porque los fallos darán paso a los gráficos.
         mostrar_ganador_perdedor( "¡Perdiste!" );
         clearInterval( g_objeto_temporizador );
+        angular.element( document.getElementById( 'boton-actualizar') ).scope().actualizar_fecha_fin( g_documento, -3 );
     }         
 
     //Esta cadena organiza el tiempo para que se vea como un cronómetro.
@@ -346,62 +357,98 @@ var acumuladorApp = angular.module( 'acumuladorApp', [] );
         
         function( $scope, $http )
         {
-            //Lo que aparece allá puede ser editado desde el exterior, como un cargue inicial.
-            /*$scope.informacion = "Aquí se inicializa información.";
-            $scope.imagen  = "imagenes/001.jpg";
-            $scope.letra = 20;*/
-            
-            $scope.informacion = "Camilo ";
             console.log( "Accediendo a angular." );
+                        
+            /**
+             * Esta función se activa al usar el botón guardar..
+             */
+            $scope.guardar_datos_php = function()
+            {
+                var cad1 = $scope.datos.documento;
+                var cad2 = $scope.datos.nombre;
 
-            /**
-             * El evento del texto es afectado por esta función, que en resumen actua al cambio instantaneo.
-             */
-            $scope.cargar_datos = function()
-            {
-                var cad = $scope.datos.texto1;
-                var cad2 = $scope.datos.texto2;
-                var vector;
+                g_documento = cad1;
+                g_nombre = cad2;
+
+                console.log( "Desde angular: " + cad1 + " " + cad2 );
                 
-                if( cad2.length <= 0 ) cad2 = "Texto 2 vacío ";
-                
-                /*if( cad != "" ) //Para realizar operaciones se revisa que la cadena digitada no sea vacía.
-                {                                                        
-                    //Si la cadena digitada representa una imagen, la imagen se cargará.
-                    if( cad.indexOf( ".jpg" ) >= 0 ){ $scope.imagen = "imagenes/" + cad; }
-                    else{ $scope.imagen  = "imagenes/001.jpg"; } 
-                    
-                    //Afectamos el tamaño de letra.
-                    if( cad.length > 10 ) $scope.letra = cad.length; 
-                    
-                    //Esta función proviene de otro archivo js. El vector se encarga de definir parámetros.
-                    cad = validar_campo( cad, [ 4, 25 ], retornar_palabras_prohibidas() );
-                    
-                    //Esto sería equivalente al return.
-                    $scope.informacion =  cad2 + cad;
-                }*/
-            };
-            
-            /**
-             * Esta función se activa al usar el texto 2.
-             */
-            /*$scope.cargar_datos_php = function()
-            {
-                var cad2 = $scope.datos.texto2;
-                
-                if( cad2.length > 0 )
+                if( cad1.length >5 && cad2.length > 3 )
                 {
                     //Aquí se hace el llamado a un php con conexión a MySQL.
-                    $http.get( 'llamado-php.php?cadena=' + cad2 ).success
+                    //$http.get( 'guardar-datos.php', { "documento": cad1, "nombre": cad2 } ).success
+                    $http.get( 'guardar-datos.php?documento=' + cad1 + '&nombre=' + cad2 ).success
                     (
                         function( response ) 
                         { 
-                            console.log( response );
-                            $scope.campos = response.records;            
+                            //console.log( response );
+                            $scope.campos = response.records;
+                            empezar(); //Aquí se empieza el juego.            
                         }
                     );   
-                }                    
-            }*/
+                }
+            }
+
+            /**
+             * Esta función se activa al usar el botón guardar..
+             */
+            $scope.cargar_datos_php = function()
+            {
+                console.log( "Desde angular cargar_datos(). " );
+                
+                $http.get( 'retornar-datos.php' ).success
+                (
+                    function( response ) 
+                    { 
+                        //console.log( "Response desde función cargar datos." );
+                        //console.log( response );
+                        $scope.campos = response.records;            
+                    }
+                );   
+            }
+
+            /**
+             * Esta función se encarga de actualizar la fecha de fin.
+             */
+            $scope.actualizar_fecha_fin = function( documento, sn_ganador )
+            {
+                console.log( "Actualización desde angular para " + documento + " " + sn_ganador );
+                
+                $http.get( 'actualizar_fecha_fin.php?documento=' + documento + '&sn_ganador=' + sn_ganador ).success
+                (
+                    function( response ) 
+                    { 
+                        console.log( "Response desde actualización de fecha fin." );
+                        console.log( response );
+                        $scope.campos = response.records;            
+                    }
+                );   
+            }
+
+            /**
+             * Esta función se encarga de actualizar la fecha de fin.
+             */
+            $scope.traer_usuario_php = function( documento )
+            {                
+                var cad1 = $scope.datos.documento;
+                console.log( "Consultando solo un usuario " + cad1 );
+
+                $http.get( 'traer_usuario_php.php?documento=' + cad1 ).success
+                (
+                    function( response ) 
+                    { 
+                        console.log( "Consultando solo usuarios " + response );
+                        $scope.campos = response.records;            
+                    }
+                );   
+            }
+
+            /**
+             * Solo es una función para probar lo que se pueda desde otros contextos.
+             */
+            $scope.imprimir = function()
+            {
+                console.log( "Imprimiendo desde angular." );
+            }
         }
     ] //Si se minifica, se deben minificar todas las llamadas inyecciones, de lo contrario mejor no minifique nada.
 );
