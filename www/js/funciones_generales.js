@@ -70,7 +70,12 @@ function definir_html_indicadores()
     salida += "</div>";
 
     salida += "<div id='contenedor-imagen'>";
-    salida += g_arreglo_palabras[ g_indice_palabra ].descripcion;
+    salida += "Por favor digita tu documento y nombre, en seguida de ello da clic en el bot&oacute;n guardar y jugar. ";
+    salida += "Una vez hecho eso, el temporizador arrancar&aacute; empieza dando clic en las letras que creas... formar&aacute;n la palabra ";
+    salida += "que tiene que ver con la siguiente clave. ¡Suerte!";
+    salida += "<br><br>";
+    salida += "<strong>" + g_arreglo_palabras[ g_indice_palabra ].descripcion + "</strong>";
+    salida += "<br>";
     salida += "</div>";
 
     return salida;
@@ -247,8 +252,8 @@ function colocar_palabras()
  */
 function mostrar_ganador_perdedor( mensaje )
 {
-    //Esto se debe remplazar por una imagen.
-    document.getElementById( "contenedor-imagen" ).innerHTML = "<img class='imagen-personaje' src='imagenes/Grafico01_" + mensaje + ".jpg'>"; 
+    document.getElementById( "contenedor-imagen" ).innerHTML = "<img class='imagen-personaje' src='imagenes/Grafico01_" + mensaje + ".jpg'>";
+    document.getElementById( "contenedor-teclado" ).style.visibility = "hidden"; //Se desaparece el contenedor y las teclas para las letras. 
 }
 
 //------------------------------ E V E N T O S ------------------------------------------------------------------------------------------------
