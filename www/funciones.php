@@ -32,7 +32,7 @@
         
         
         
-        escribir_archivo( $sql." -> ".$dato, "archivo_select" );
+        //escribir_archivo( $sql." -> ".$dato, "archivo_select" );
         
         $conexion = new mysqli( $servidor, $usuario, $clave, $base_de_datos );
         $result = $conexion->query( $sql );
