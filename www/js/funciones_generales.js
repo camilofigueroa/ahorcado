@@ -1,6 +1,8 @@
 /**
  * Autor: Camilo Figueroa ( Crivera ) 23/10/2016
  * Este es el código para el clásico juego del ahorcado. Aunque con unas variaciones.
+ * Desde el inicio se pueden escoger una serie de parámetros que pueden redefinir el juego.
+ * La asignación de palabras se encuentra en la función colocar_palabras. 
  */
 
 
@@ -8,7 +10,7 @@
 
 const g_maximo_fallos = 7;
 const g_tiempo_iteracion = 1000;
-const g_maximo_tiempo = 2;
+const g_maximo_tiempo = 2; //El tiempo está dado para que sea en dos minutos pero se puede definir desde esta constante.
 
 var g_arreglo_palabras = []; //Arreglo multidimensional para almacenar todas las palabras y sus características.
 var g_indice_palabra = -1;
@@ -68,7 +70,7 @@ function definir_html_indicadores()
     salida += "</div>";
 
     salida += "<div id='contenedor-imagen'>";
-    salida += "0";
+    salida += g_arreglo_palabras[ g_indice_palabra ].descripcion;
     salida += "</div>";
 
     return salida;
@@ -172,7 +174,7 @@ function verificar_letra_digitada( objeto )
     if( letra_de_palabra.toLowerCase() != cad.toLowerCase() )
     {
         g_conteo_equivocaciones ++;
-        document.getElementById( "contenedor-imagen" ).innerHTML = g_conteo_equivocaciones;
+        document.getElementById( "contenedor-imagen" ).innerHTML = "<img class='imagen-personaje' src='imagenes/Grafico01_" + g_conteo_equivocaciones + ".jpg'>";
     }
 
     //console.log( "Se digitó sobre el texto " + objeto.name );
@@ -207,7 +209,7 @@ function verificar_letra_oprimida( objeto )
     if( sn_encontrada != 1 )
     {
         g_conteo_equivocaciones ++;
-        document.getElementById( "contenedor-imagen" ).innerHTML = g_conteo_equivocaciones;
+        document.getElementById( "contenedor-imagen" ).innerHTML = "<img class='imagen-personaje' src='imagenes/Grafico01_" + g_conteo_equivocaciones + ".jpg'>";
         objeto.style.color = "RED";
         objeto.style.fontSize = 15; 
 
@@ -246,7 +248,7 @@ function colocar_palabras()
 function mostrar_ganador_perdedor( mensaje )
 {
     //Esto se debe remplazar por una imagen.
-    document.getElementById( "contenedor-imagen" ).innerHTML = mensaje;
+    document.getElementById( "contenedor-imagen" ).innerHTML = "<img class='imagen-personaje' src='imagenes/Grafico01_" + mensaje + ".jpg'>"; 
 }
 
 //------------------------------ E V E N T O S ------------------------------------------------------------------------------------------------
@@ -272,7 +274,7 @@ function al_digitar_letra( objeto )
 
     if( verificar_ganador( 0 ) == 1 )
     {
-        mostrar_ganador_perdedor( "¡Ganaste!" );
+        mostrar_ganador_perdedor( 8 ); //La imagen de que aprueba es la 8.
     } 
 }
 
@@ -285,7 +287,7 @@ function al_dar_clic( objeto )
 
     if( verificar_ganador( 0 ) == 1 )
     {
-        mostrar_ganador_perdedor( "¡Ganaste!" );
+        mostrar_ganador_perdedor( 8 ); //La imagen de que aprueba es la 8.
     }
 }
 
@@ -321,7 +323,7 @@ function al_suceder_tiempo()
         if( verificar_ganador( -1 ) == -1 )
         {
             //Aquí se muestra el mensaje.
-            mostrar_ganador_perdedor( "¡Perdiste!" );
+            mostrar_ganador_perdedor( 7 ); //La imagen de que no aprueba es la 7.
         }
     }
 
@@ -329,7 +331,7 @@ function al_suceder_tiempo()
     if( g_conteo_equivocaciones >= g_maximo_fallos )
     {
         g_conteo_equivocaciones = g_maximo_fallos; //Esto se acomoda porque los fallos darán paso a los gráficos.
-        mostrar_ganador_perdedor( "¡Perdiste!" );
+        mostrar_ganador_perdedor( 7 ); //La imagen de que no aprueba es la 7.
         clearInterval( g_objeto_temporizador );
         angular.element( document.getElementById( 'boton-actualizar') ).scope().actualizar_fecha_fin( g_documento, -3 );
     }         
