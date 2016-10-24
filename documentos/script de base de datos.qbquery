@@ -1,5 +1,4 @@
-
-
+﻿
 
 
 CREATE SCHEMA bd_ahorcado;
@@ -17,6 +16,25 @@ CREATE TABLE tb_usuarios
   primary key( documento )
 );
 
+ALTER TABLE `tb_usuarios` ADD `tiempo_juego` DATETIME NULL AFTER `fecha_fin`;
+
 SHOW TABLES;
 
 SELECT * FROM tb_usuarios;
+
+SELECT * FROM tb_usuarios;
+
+SELECT YEAR( NOW() ) * 10000 + MONTH( NOW() ) * 100 + DAY( NOW() );
+
+SELECT * FROM tb_usuarios
+WHERE YEAR( NOW() ) * 10000 + MONTH( NOW() ) * 100 + DAY( NOW() ) = YEAR( fecha_registro ) * 10000 + MONTH( fecha_registro ) * 100 + DAY( fecha_registro )
+AND tiempo_juego IS NOT NULL
+ORDER BY fecha_registro DESC LIMIT 10;
+
+
+SELECT TIMEDIFF( fecha_fin, fecha_inicio ) FROM tb_usuarios;
+
+SELECT * FROM tb_usuarios ;
+
+SELECT *, CASE WHEN sn_ganador = 1 THEN 'A' ELSE 'D' END AS estado
+FROM tb_usuarios;
