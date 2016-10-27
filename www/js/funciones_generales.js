@@ -245,6 +245,8 @@ function colocar_palabras()
     g_arreglo_palabras.push( { palabra: "monetizar",        descripcion: "Todo escritor de blogs y páginas web debería realizar esta actividad. Es muy importante para su bolsillo." } );
     g_arreglo_palabras.push( { palabra: "teletrabajo",      descripcion: "Es una modalidad de trabajo que se vale de las TIC y le permite al trabajor laborar desde un lugar diferente a la oficina." } );
     g_arreglo_palabras.push( { palabra: "tecnologia" ,      descripcion: "Es una parte importante de la modalidad de teletrabajo pues permite realizar lo técnico, desde el mismo trabajo hasta el cobro de sus honorarios." } );
+    g_arreglo_palabras.push( { palabra: "informacion" ,      descripcion: "Las TIC conforman el conjunto de recursos necesarios para manipular...?" } );
+    g_arreglo_palabras.push( { palabra: "monetizacion" ,      descripcion: "Es convertir un activo en o establecer algo como dinero o moneda de curso legal." } );
 }
 
 /**
@@ -269,6 +271,7 @@ function empezar()
     document.getElementById( "boton-guardar" ).style.visibility = "hidden";
     document.getElementById( "campo-documento" ).disabled = "disabled";
     document.getElementById( "campo-nombre" ).disabled = "disabled";
+    document.getElementById('contenedor-teclado').style.display="block";
 
 }
 
