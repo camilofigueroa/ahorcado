@@ -245,8 +245,18 @@ function colocar_palabras()
     g_arreglo_palabras.push( { palabra: "monetizar",        descripcion: "Todo escritor de blogs y páginas web debería realizar esta actividad. Es muy importante para su bolsillo." } );
     g_arreglo_palabras.push( { palabra: "teletrabajo",      descripcion: "Es una modalidad de trabajo que se vale de las TIC y le permite al trabajor laborar desde un lugar diferente a la oficina." } );
     g_arreglo_palabras.push( { palabra: "tecnologia" ,      descripcion: "Es una parte importante de la modalidad de teletrabajo pues permite realizar lo técnico, desde el mismo trabajo hasta el cobro de sus honorarios." } );
-    g_arreglo_palabras.push( { palabra: "informacion" ,      descripcion: "Las TIC conforman el conjunto de recursos necesarios para manipular...?" } );
-    g_arreglo_palabras.push( { palabra: "monetizacion" ,      descripcion: "Es convertir un activo en o establecer algo como dinero o moneda de curso legal." } );
+    g_arreglo_palabras.push( { palabra: "informacion" ,     descripcion: "Las TIC conforman el conjunto de recursos necesarios para manipular la...?" } );
+    g_arreglo_palabras.push( { palabra: "modalidad" ,       descripcion: "El teletrabajo es una forma de trabajar, es un estilo de vida, es una... ?" } );
+    g_arreglo_palabras.push( { palabra: "internet" ,        descripcion: "El teletrabajador debe hacer uso de este recurso, tanto para su trabajo, entregas, as&iacute; como para sus cobros." } );
+    g_arreglo_palabras.push( { palabra: "conectividad" ,    descripcion: "El teletrabajador debe mantener este recurso, tanto para su trabajo, entregas, as&iacute; como para sus cobros." } );
+    g_arreglo_palabras.push( { palabra: "cotidianeidad" ,   descripcion: "El teletrabajador es una persona que hace uso de la tecnología y todos los días está en contacto con ella, todos los días, todos los días." } );
+    g_arreglo_palabras.push( { palabra: "mercadolibre" ,    descripcion: "Es una plataforma donde se puede comprar y vender, puede ser un nicho potencial de negocio para un teletrabajador con gran habilidad." } );
+    g_arreglo_palabras.push( { palabra: "iniciativa" ,      descripcion: "Este término es muy importante para un trabajador, porque de él dependerán sus logros personales. Es la medida de lo que puede hacer." } );
+    g_arreglo_palabras.push( { palabra: "plataforma" ,      descripcion: "Es el término que reciben los sitios web que permiten gestionar la información de sus usuarios; abarcan temas de capacitación, negocios, información general, diversión, entre otros." } );
+    g_arreglo_palabras.push( { palabra: "senavirtual" ,     descripcion: "Es una plataforma que permite la capacitación y auto gestión del conocimiento, una buena opción para empezar con el teletrabajo." } );
+    g_arreglo_palabras.push( { palabra: "cuenteria" ,       descripcion: "Seguramente alguien que ejerza este pasatiempo o empleo podría ser un gran teletrabajador si usara alguna plataforma para monetizarlo por internet." } );
+    g_arreglo_palabras.push( { palabra: "autoformacion" ,   descripcion: "La capacitación de una persona para el teletrabajo es posible desde sí mismo, desde sus actividades, con su propio horario, desde su..." } );
+    
 }
 
 /**
