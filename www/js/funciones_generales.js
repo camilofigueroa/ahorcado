@@ -267,6 +267,9 @@ function empezar()
     definir_temporizador();
     //objeto.style.visibility = "hidden";
     document.getElementById( "boton-guardar" ).style.visibility = "hidden";
+    document.getElementById( "campo-documento" ).disabled = "disabled";
+    document.getElementById( "campo-nombre" ).disabled = "disabled";
+
 }
 
 /**
@@ -388,6 +391,8 @@ var acumuladorApp = angular.module( 'acumuladorApp', [] );
                         function( response ) 
                         { 
                             //console.log( response );
+                            document.getElementById('contenedor_titulo_ranking').innerHTML="<h3>Ranking</h3>";
+                            //document.getElementById('boton-guardar').style.visibility="hidden";
                             $scope.campos = response.records;
                             empezar(); //Aquí se empieza el juego.            
                         }
@@ -437,12 +442,23 @@ var acumuladorApp = angular.module( 'acumuladorApp', [] );
             $scope.traer_usuario_php = function( documento )
             {                
                 var cad1 = $scope.datos.documento;
-                console.log( "Consultando solo un usuario " + cad1 );
+                //console.log( "Consultando solo un usuario " + cad1 );
 
                 $http.get( 'traer_usuario_php.php?documento=' + cad1 ).success
                 (
                     function( response ) 
                     { 
+                        document.getElementById('contenedor_titulo_ranking').innerHTML="<h3>Consulta</h3>";
+                        
+                        console.log(response.records.length);
+
+                        if ( response.records.length != 0)
+                        {
+                            document.getElementById('boton-guardar').style.visibility="hidden";
+                        }else{
+                            document.getElementById('boton-guardar').style.visibility="visible";
+                        }
+
                         console.log( "Consultando solo usuarios " + response );
                         $scope.campos = response.records;            
                     }
