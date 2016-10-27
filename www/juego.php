@@ -3,10 +3,11 @@
 <?php
     
     include( "funciones.php" );
+    include("libreria.php");
     
 ?>
 
-<html ng-app="acumuladorApp"><!--Hay que observar que aquÌ se inicia el ng-app-->
+<html ng-app="acumuladorApp"><!--Hay que observar que aqu√≠ se inicia el ng-app-->
     
     <head>
         <title>Ahorcado</title>
@@ -20,50 +21,78 @@
     </head>
     
     <body>
-        
+<div class="container-fluid">
+       <?php include('encabezado.php'); ?>
+    <div class="row">
         <div ng-controller="acumuladorAppCtrl">
         
             <div id="gran-contenedor" ng-controller="acumuladorAppCtrl">
-                <!-- Todo el contenido de este div se crear· autom·ticamente desde el js.  -->                
+                <!-- Todo el contenido de este div se crear√° autom√°ticamente desde el js.  -->                
             </div>
-            
+         
             <div>
             
-                <div id="contenedor-formulario-datos">
-                    
-                    Documento   <input type="text" ng-model="datos.documento" ng-change="traer_usuario_php();"> <br>
-                    Nombre   <input type="text" ng-model="datos.nombre"> <br>
-                    <button id="boton-guardar" ng-click="guardar_datos_php()" value="Guardar y jugar.">Guardar y jugar.</button>
-                    
-                    <!-- Este botÛn permanecer· oculto pues su funcionalidad ser· usada por el javascript con Angular. -->
-                    <button id="boton-ranking" ng-click="cargar_datos_php()">Ver ranking.</button>
-                    
-                    <!-- Este botÛn permanecer· oculto pues su funcionalidad ser· usada por el javascript con Angular. -->
-                    <button id="boton-actualizar" ng-click="actualizar_fecha_fin( 54364, 0 )">Actualizar datos.</button>
-                    
+                <div class="row" id="contenedor-formulario-datos">
+                    <div class="col-xs-12 col-md-5">
+                        <input type="text" id="campo-documento" class="form-control" placeholder="Documento" ng-model="datos.documento" ng-change="traer_usuario_php();">
+                    </div>    
+                    <div class="col-xs-12 col-sm-5 col-md-5">
+                        <input type="text" id="campo-nombre" class="form-control" placeholder="Nombre" ng-model="datos.nombre">
+                    </div>    
+                    <div class="col-xs-12 col-md-2">
+                        <button id="boton-guardar" class="btn btn-primary" ng-click="guardar_datos_php()" value="Guardar y jugar.">Guardar y jugar.</button>
+                    </div>    
+                        
+                        <!-- Este bot√≥n permanecer√° oculto pues su funcionalidad ser√° usada por el javascript con Angular. -->
+                        <button id="boton-ranking" ng-click="cargar_datos_php()">Ver ranking.</button>
+                        
+                        <!-- Este bot√≥n permanecer√° oculto pues su funcionalidad ser√° usada por el javascript con Angular. -->
+                        <button id="boton-actualizar" ng-click="actualizar_fecha_fin( 54364, 0 )">Actualizar datos.</button>
+                        
+                    </div>
                 </div>
                 
                 
                 <div id="contenedor-ranking">
-                    
-                    <h3>Ranking</h3> o resultados de la b&uacute;squeda. 
-                    
+                    <div id="contenedor_titulo_ranking"><h3>Ranking</h3></div>
+                    <table >
+                        <tr>
+                            <td width="200px;"><b>Duraci√≥n</b></td>
+                            <td width="150px;"><b>Documento</b></td>
+                            <td width="150px;"><b>Nombre</b></td>
+                            <td width="250px;"><b>Fecha inicio</b></td>
+                            <td width="250px;"><b>Fecha fin</b></td>
+                            <td width="150px;"><b>Estado</b></td>                            
+                        </tr>
+                    </table>
+                    <br>
                     <!-- Esto sucede cuando se guarda un usuario. -->
                     <div ng-repeat="x in campos">
-                        <strong>{{ x.Tiempo_juego }}</strong>
-                        Documento: {{ x.Documento }}
-                        Nombre: {{ x.Nombre }}
-                        Fecha inicio: {{ x.Fecha_registro }}
-                        Fecha fin: {{ x.Fecha_fin }}
-                        [{{ x.estado }}]
+                       <table>
+                        <tr>
+                            <td width="200px;"><strong>{{ x.Tiempo_juego }}</strong></td>
+                            <td width="150px;">{{ x.Documento }}</td>
+                            <td width="150px;">{{ x.Nombre }}</td>
+                            <td width="250px;">{{ x.Fecha_registro }}</td>
+                            <td width="250px;">{{ x.Fecha_fin }}</td>
+                            <td width="150px;">{{ x.estado }}</td>
+                        </tr>
+                        </table>
                     </div>
-                    
                 </div>
+
             </div>
-        
+            
+
+            <hr>
+        <div class="row" padding='5px';">
+            <div class="col-xs-12 col-md-3"></div>
+            <div class="col-xs-12 col-md-6"><center><h4>TGO. ADSI</h4><h6>adsi1132133.blogspot.com</h6></center></div>
+            <div class="col-xs-12 col-md-3"></div>
+        </div>
         </div>
 
-        
-    </body>
+    </div>   
+</body>
     
 </html>
